@@ -3,7 +3,7 @@ import Hero from "@/components/Hero";
 import CharacterGrid from "@/components/CharacterGrid";
 import Features from "@/components/Features";
 import Stats from "@/components/Stats";
-import HowItWorks from "@/components/HowItWorks";
+import Transformations from "@/components/Transformations";
 import ChatSection from "@/components/ChatSection";
 
 export default function Home() {
@@ -20,6 +20,8 @@ export default function Home() {
           style={{
             backgroundImage: 'url(/background.jpg)',
             backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
             imageRendering: 'auto'
           }}
         >
@@ -32,7 +34,7 @@ export default function Home() {
           <Features />
           <Stats />
           <CharacterGrid />
-          <HowItWorks />
+          <Transformations />
           <ChatSection />
           
           {/* Footer */}

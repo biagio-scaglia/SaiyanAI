@@ -1,3 +1,4 @@
+
 "use client";
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
@@ -92,9 +93,19 @@ export default function ChatSection({ persona = "default", initialMessage }: Cha
 
   return (
     <section id="chat" className="py-20 bg-transparent min-h-screen border-t border-white/5 flex flex-col items-center">
-      <div className="container max-w-4xl px-4 w-full h-[800px] flex flex-col bg-zinc-900/50 rounded-3xl border border-white/10 overflow-hidden shadow-2xl">
+      <div className="container relative max-w-4xl px-4 w-full h-[800px] flex flex-col bg-black rounded-3xl border border-white/10 overflow-hidden shadow-2xl">
+        {/* Chat Background */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/background-chat.jpg" 
+            alt="Chat Background" 
+            className="w-full h-full object-cover opacity-60" 
+          />
+          <div className="absolute inset-0 bg-black/70" />
+        </div>
+
         {/* Header */}
-        <div className="p-6 border-b border-white/20 bg-zinc-900/90 backdrop-blur-md flex items-center gap-3">
+        <div className="relative z-10 p-6 border-b border-white/20 bg-zinc-900/80 backdrop-blur-md flex items-center gap-3">
           <div className="p-2 bg-orange-600 rounded-lg">
             <Sparkles className="w-5 h-5 text-white" />
           </div>
@@ -105,7 +116,7 @@ export default function ChatSection({ persona = "default", initialMessage }: Cha
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+        <div className="relative z-10 flex-1 overflow-y-auto p-6 space-y-6">
           <AnimatePresence>
             {messages.map((msg) => (
               <motion.div
@@ -158,7 +169,7 @@ export default function ChatSection({ persona = "default", initialMessage }: Cha
         </div>
 
         {/* Input */}
-        <div className="p-4 bg-zinc-900/90 backdrop-blur-md border-t border-white/20">
+        <div className="relative z-10 p-4 bg-zinc-900/80 backdrop-blur-md border-t border-white/20">
           <form onSubmit={handleSubmit} className="relative flex items-center gap-2">
             <input
               type="text"

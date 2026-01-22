@@ -4,10 +4,10 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 
 const stats = [
-  { number: "4", label: "Available Personas", suffix: "" },
-  { number: "1000+", label: "Knowledge Chunks", suffix: "" },
-  { number: "5", label: "Knowledge Files", suffix: "" },
-  { number: "24/7", label: "Always Ready", suffix: "" }
+  { number: "4", label: "Z-Fighters", suffix: "" },
+  { number: "9000", label: "Power Level", suffix: "+" },
+  { number: "12", label: "Universes", suffix: "" },
+  { number: "∞", label: "Potential", suffix: "" }
 ];
 
 function AnimatedNumber({ value, suffix = "" }: { value: string; suffix?: string }) {

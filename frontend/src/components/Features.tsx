@@ -5,38 +5,38 @@ import { Brain, Database, Search, Shield, Zap, MessageSquare } from "lucide-reac
 const features = [
   {
     icon: Brain,
-    title: "Powered AI",
-    description: "Built on Llama-3.2 and LangGraph to deliver accurate, grounded answers about the Dragon Ball universe.",
-    color: "from-orange-500 to-yellow-500"
+    title: "Shenron's Wisdom",
+    description: "Tap into the infinite knowledge of the Eternal Dragon to answer your questions.",
+    color: "from-green-500 to-emerald-500"
   },
   {
     icon: Database,
-    title: "Local Knowledge Base",
-    description: "A Qdrant vector database packed with characters, transformations, techniques, and story arcs.",
+    title: "Capsule Corp Database",
+    description: "Archives containing every technique, saga, and bio, stored compactly on your device.",
     color: "from-blue-500 to-cyan-500"
   },
   {
     icon: Search,
-    title: "Web Search",
-    description: "DuckDuckGo integration for release dates, recent news, and information outside the lore.",
+    title: "Scouter Network",
+    description: "Scans the entire internet for the latest power levels and news.",
     color: "from-purple-500 to-pink-500"
   },
   {
     icon: MessageSquare,
-    title: "Multiple Personas",
-    description: "Chat as Goku, Vegeta, Gohan, or Frieza—each with a distinct voice and attitude.",
-    color: "from-green-500 to-emerald-500"
+    title: "Telepathic Link",
+    description: "Communicate directly with Goku, Vegeta, or Frieza via King Kai's connection.",
+    color: "from-orange-500 to-yellow-500"
   },
   {
     icon: Shield,
-    title: "Local Privacy",
-    description: "Your data and models stay on your machine. Nothing is sent to external servers.",
+    title: "Hidden Ki",
+    description: "Your energy signature remains undetected. Everything runs locally on your machine.",
     color: "from-red-500 to-orange-500"
   },
   {
     icon: Zap,
-    title: "Advanced RAG",
-    description: "Retrieval-Augmented Generation that blends curated knowledge with strong reasoning.",
+    title: "Instant Transmission",
+    description: "Teleports the exact information you need instantly to generate answers.",
     color: "from-yellow-500 to-orange-500"
   }
 ];

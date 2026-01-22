@@ -25,9 +25,9 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-5xl md:text-8xl font-black mb-6 tracking-tighter drop-shadow-2xl">
-            LIBERA IL TUO <br />
+            UNLEASH YOUR <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-500 drop-shadow-sm">
-              KI INTERIORE
+              INNER POWER
             </span>
           </h1>
           
