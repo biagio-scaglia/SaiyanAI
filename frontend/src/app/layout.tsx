@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "SaiyanAI - Dragon Ball AI Assistant",
-  description: "Assistente AI esperto su Dragon Ball, potenziato da LangGraph, Qdrant e Llama-3.2",
+  description: "A Dragon Ball AI assistant powered by LangGraph, Qdrant, and Llama-3.2",
 };
 
 export default function RootLayout({

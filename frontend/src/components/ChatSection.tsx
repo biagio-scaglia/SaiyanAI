@@ -24,7 +24,9 @@ export default function ChatSection({ persona = "default", initialMessage }: Cha
     {
       id: "1",
       role: "assistant",
-      content: initialMessage || "Hi! I'm the Dragon Ball AI. Ask me anything about Goku, transformations, or the latest series!",
+      content:
+        initialMessage ||
+        "Hi! I'm SaiyanAI. Ask me anything about Dragon Ball sagas, transformations, techniques, or lore!",
       timestamp: new Date(),
     }
   ]);
@@ -78,7 +80,8 @@ export default function ChatSection({ persona = "default", initialMessage }: Cha
       const errorMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: "Sorry, my ki is low right now. I couldn't reach the backend. Make sure uvicorn is running!",
+        content:
+          "Sorry, my ki is low right now… I couldn't reach the backend. Make sure `uvicorn` is running at `http://localhost:8000`!",
         timestamp: new Date()
       };
       setMessages(prev => [...prev, errorMsg]);
@@ -96,8 +99,8 @@ export default function ChatSection({ persona = "default", initialMessage }: Cha
             <Sparkles className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h2 className="text-xl font-bold text-white">Oracle System</h2>
-            <p className="text-xs text-orange-400">Powered by Llama-3 & Qdrant</p>
+            <h2 className="text-xl font-bold text-white">SaiyanAI - Capsule Chat</h2>
+            <p className="text-xs text-orange-400">Llama-3.2 + Qdrant (knowledge base)</p>
           </div>
         </div>
 
@@ -132,7 +135,7 @@ export default function ChatSection({ persona = "default", initialMessage }: Cha
                   <p>{msg.content}</p>
                   {msg.source && (
                      <div className="mt-2 text-xs opacity-50 border-t border-white/10 pt-1 flex items-center gap-1">
-                        <span>Source: {msg.source === 'web' ? 'DuckDuckGo' : 'Knowledge Base'}</span>
+                        <span>Source: {msg.source === 'web' ? 'Web (DuckDuckGo)' : 'Knowledge Base'}</span>
                      </div>
                   )}
                 </div>
@@ -147,7 +150,7 @@ export default function ChatSection({ persona = "default", initialMessage }: Cha
                </div>
                <div className="bg-zinc-800/90 backdrop-blur-sm p-4 rounded-2xl rounded-tl-none border border-white/10 flex items-center gap-2">
                   <Loader2 className="w-4 h-4 text-orange-500 animate-spin" />
-                  <span className="text-gray-400 text-sm">Gathering energy...</span>
+                  <span className="text-gray-400 text-sm">Gathering ki...</span>
                </div>
             </motion.div>
           )}
@@ -161,7 +164,7 @@ export default function ChatSection({ persona = "default", initialMessage }: Cha
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask about Goku, Vegeta, or upcoming arcs..."
+              placeholder="Ask about Goku, Vegeta, transformations, or sagas..."
               className="w-full bg-zinc-950/90 backdrop-blur-sm text-white placeholder-gray-400 rounded-full py-4 pl-6 pr-14 border border-white/20 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/50 transition-all font-medium"
             />
             <button 

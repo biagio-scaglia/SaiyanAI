@@ -6,28 +6,28 @@ const CHARACTERS = [
   {
     name: "Goku",
     role: "Saiyan Raised on Earth",
-    desc: "The main protagonist. Cheerful, energetic, and obsessed with fighting.",
+    desc: "The main protagonist: cheerful, energetic, and always ready to train.",
     color: "from-orange-500 to-yellow-500",
     image: "/goku.jpg"
   },
   {
     name: "Vegeta",
     role: "Prince of Saiyans",
-    desc: "Proud and disciplined. Goku's eternal rival and ally.",
+    desc: "Proud and disciplined. Eternal rival… and ally when it matters.",
     color: "from-blue-600 to-purple-600",
     image: "/vegeta.webp"
   },
   {
     name: "Gohan",
     role: "Hybrid Saiyan",
-    desc: "Goku's son. Possesses immense latent potential.",
+    desc: "Goku’s son: brilliant mind and immense hidden potential.",
     color: "from-purple-500 to-indigo-500",
     image: "/gohan.webp"
   },
   {
     name: "Frieza",
     role: "Galactic Tyrant",
-    desc: "Cruel and powerful emperor. Responsible for destroying Planet Vegeta.",
+    desc: "A cruel, terrifying emperor. The nightmare of space… and the Saiyans.",
     color: "from-purple-800 to-pink-600",
     image: "/frieza.webp"
   }
@@ -42,8 +42,8 @@ export default function CharacterGrid() {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4 tracking-tight">Main Fighters</h2>
-          <p className="text-gray-400">Legends of the Dragon Ball Universe</p>
+          <h2 className="text-4xl font-bold mb-4 tracking-tight">Legendary Fighters</h2>
+          <p className="text-gray-400">Pick a character and chat in their voice</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -72,7 +72,7 @@ export default function CharacterGrid() {
                 </p>
                 
                 <Link href={`/character/${char.name.toLowerCase()}`} className="block w-full text-center py-3 rounded-lg bg-zinc-800 text-sm font-medium hover:bg-zinc-700 transition-colors border border-white/5 group-hover:bg-white/10">
-                    Ask about {char.name}
+                    Chat with {char.name}
                 </Link>
               </div>
             </motion.div>

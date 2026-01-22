@@ -1,6 +1,9 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import CharacterGrid from "@/components/CharacterGrid";
+import Features from "@/components/Features";
+import Stats from "@/components/Stats";
+import HowItWorks from "@/components/HowItWorks";
 import ChatSection from "@/components/ChatSection";
 
 export default function Home() {
@@ -26,13 +29,20 @@ export default function Home() {
 
         {/* Content */}
         <div className="relative z-10">
+          <Features />
+          <Stats />
           <CharacterGrid />
+          <HowItWorks />
           <ChatSection />
           
           {/* Footer */}
           <footer className="py-8 bg-black/50 backdrop-blur text-center text-gray-600 text-sm border-t border-white/5">
-            <p>Developed by <span className="text-orange-500 font-semibold">Biagio Scaglia</span></p>
-            <p className="mt-2 text-xs text-gray-500">Built with Next.js, LangChain & Dragon Ball Passion</p>
+            <p>
+              Developed by <span className="text-orange-500 font-semibold">Biagio Scaglia</span>
+            </p>
+            <p className="mt-2 text-xs text-gray-500">
+              Next.js + LangChain + Dragon Ball Passion
+            </p>
           </footer>
         </div>
       </div>

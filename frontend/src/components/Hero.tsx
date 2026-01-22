@@ -25,15 +25,15 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-5xl md:text-8xl font-black mb-6 tracking-tighter drop-shadow-2xl">
-            UNLEASH YOUR <br />
+            LIBERA IL TUO <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-500 drop-shadow-sm">
-              INNER POWER
+              KI INTERIORE
             </span>
           </h1>
           
           <p className="text-gray-200 text-lg md:text-xl max-w-2xl mx-auto mb-10 drop-shadow-md font-medium">
-            The ultimate AI companion for the Dragon Ball universe. 
-            Ask about lore, transformations, or release dates.
+            The ultimate AI companion for the Dragon Ball universe.
+            Ask about lore, transformations, techniques, and sagas… and if needed, I can search the web too.
           </p>
           
           <div className="flex gap-4 justify-center">
@@ -41,7 +41,7 @@ export default function Hero() {
               Start Chatting
             </a>
             <a href="#characters" className="bg-white/10 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all backdrop-blur-sm border border-white/20 shadow-lg">
-              Explore
+              Explore Fighters
             </a>
           </div>
         </motion.div>
