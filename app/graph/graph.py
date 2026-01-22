@@ -29,7 +29,16 @@ vector_store = QdrantVectorStore(
 
 # LLM - Optimized temperature for better balance between creativity and accuracy
 # Temperature 0.3 allows slight variation while maintaining accuracy
-llm = ChatLlamaCpp(model_path=MODEL_PATH, temperature=0.3, n_ctx=2048, verbose=False)
+# n_gpu_layers=-1 attempts to offload all layers to GPU (requires CUDA/Metal)
+# n_batch=512 improves prompt processing speed
+llm = ChatLlamaCpp(
+    model_path=MODEL_PATH,
+    temperature=0.3,
+    n_ctx=2048,
+    n_gpu_layers=-1,
+    n_batch=512,
+    verbose=False
+)
 
 # Search
 search_tool = DuckDuckGoSearchRun()
