@@ -118,26 +118,32 @@ def router_node(state: AgentState):
         return "retrieve"
 
     # Use LLM for ambiguous cases
+    # Use LLM for ambiguous cases
     prompt = PromptTemplate.from_template(
-        """You are an expert router for a Dragon Ball AI assistant.
-        
-        Route to VECTOR if the question is about:
-        - Dragon Ball characters, their abilities, transformations, or backstories
-        - Plot, story arcs, events within the anime/manga universe
-        - Techniques, powers, or lore from the series
-        - Relationships between characters
-        - In-universe facts and information
-        
-        Route to WEB if the question is about:
-        - Real-world release dates, announcements, or news
-        - Merchandise, games, or products
-        - Production information, voice actors, or creators
-        - Current events or recent updates outside the story
-        - Dates, schedules, or time-sensitive information
-        
-        Question: {question}
-        
-        Respond with ONLY 'VECTOR' or 'WEB':"""
+        """You are a strict classifier.
+
+Decide where to route the user question.
+
+VECTOR:
+- In-universe Dragon Ball knowledge
+- Characters, transformations, techniques
+- Story, lore, events inside the anime/manga
+- Relationships between characters
+
+WEB:
+- Real-world information
+- Release dates, news, announcements
+- Merchandise, games, products
+- Voice actors, creators, production details
+
+Rules:
+- If the question refers to the Dragon Ball universe itself, choose VECTOR
+- If the question refers to the real world, choose WEB
+- If uncertain, choose VECTOR
+
+Question: {question}
+
+Answer with only one word: VECTOR or WEB"""
     )
     chain = prompt | llm | StrOutputParser()
     decision = chain.invoke({"question": state["question"]}).strip().upper()
