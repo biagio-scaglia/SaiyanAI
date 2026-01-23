@@ -6,7 +6,8 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_qdrant import QdrantVectorStore
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_community.tools import DuckDuckGoSearchRun
+from langchain_community.tools import DuckDuckGoSearchRun, WikipediaQueryRun
+from langchain_community.utilities import WikipediaAPIWrapper
 from qdrant_client import QdrantClient
 from langgraph.graph import StateGraph, END
 
@@ -40,6 +41,7 @@ llm = ChatLlamaCpp(
 
 # Search
 search_tool = DuckDuckGoSearchRun()
+wikipedia_tool = WikipediaQueryRun(api_wrapper=WikipediaAPIWrapper())
 
 
 # --- State ---
@@ -185,9 +187,19 @@ def retrieve_node(state: AgentState):
 
 
 def web_search_node(state: AgentState):
-    print("Searching Web...")
-    results = search_tool.invoke(state["question"])
-    return {"context": results, "source": "web"}
+    print("Searching Web (DuckDuckGo + Wikipedia)...")
+    try:
+        ddg_res = search_tool.invoke(state["question"])
+    except Exception as e:
+        ddg_res = f"DuckDuckGo Error: {e}"
+
+    try:
+        wiki_res = wikipedia_tool.invoke(state["question"])
+    except Exception as e:
+        wiki_res = f"Wikipedia Error: {e}"
+
+    combined_results = f"--- DuckDuckGo Results ---\n{ddg_res}\n\n--- Wikipedia Results ---\n{wiki_res}"
+    return {"context": combined_results, "source": "web"}
 
 
 def generate_node(state: AgentState):
@@ -236,10 +248,11 @@ def generate_node(state: AgentState):
         
         INSTRUCTIONS:
         1. **Relevance Check**: Ignore any search results that are NOT related to Dragon Ball, Anime, Manga, or Games.
-        2. **Summarize**: Use ONLY the relevant Dragon Ball search results to answer the question.
-        3. **Gaps**: If the search results are about math (e.g. Laplace transforms), science, or unrelated topics, IGNORE THEM.
-        4. **Fallback**: If no relevant Dragon Ball info is found in the results, say "I couldn't find any clear Dragon Ball information about that."
-        5. **Persona**: Maintain your character's voice.
+        2. **Detailed Summary**: Use the search results to provide a comprehensive answer. Write at least 2-3 detailed sentences.
+        3. **Elaborate**: If there is enough information, go into detail about dates, plot points, or mechanics.
+        4. **Gaps**: If the search results are about math (e.g. Laplace transforms), science, or unrelated topics, IGNORE THEM.
+        5. **Fallback**: If no relevant Dragon Ball info is found in the results, say "I couldn't find any clear Dragon Ball information about that."
+        6. **Persona**: Maintain your character's voice.
         
         Question: {state["question"]}
         """
