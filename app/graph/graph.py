@@ -224,19 +224,39 @@ def generate_node(state: AgentState):
     selected_persona_prompt = prompts.get(persona, prompts["default"])
 
     # SUPER STRICT SYSTEM PROMPT
-    system_prompt = f"""{selected_persona_prompt}
-    
-    CONTEXT DATA:
-    {context}
-    
-    OFFICIAL INSTRUCTIONS:
-    1. **NO OUTSIDE KNOWLEDGE**: You are FORBIDDEN from using your pre-trained knowledge. Use ONLY the 'CONTEXT DATA' provided above.
-    2. **STRICT FALLBACK**: If the answer is not explicitly written in the CONTEXT DATA, you MUST respond with a variation of "I don't have that information." Do not guess. Do not halllucinate.
-    3. **QUOTES**: When possible, base your answer on specific phrases from the text.
-    4. **PERSONA**: Keep your persona, but do not let it excuse hallucinations. Accuracy is the highest law.
-    
-    Question: {state["question"]}
-    """
+    # --- PROMPT SELECTION ---
+    source = state.get("source", "retriever")
+
+    if source == "web":
+        # WEB SEARCH MODE: Lenient summarization
+        system_prompt = f"""{selected_persona_prompt}
+        
+        SEARCH RESULTS:
+        {context}
+        
+        INSTRUCTIONS:
+        1. **Summarize**: Use the search results above to answer the user's question clearly.
+        2. **Gaps**: If the results don't fully answer the question, say "Based on my quick search, here is what I found..." and give the best possible info.
+        3. **Persona**: Maintain your character's voice while summarizing.
+        4. **Attribution**: Mention that this info comes from a web search.
+        
+        Question: {state["question"]}
+        """
+    else:
+        # STRICT RAG MODE (Knowledge Base): Zero Tolerance
+        system_prompt = f"""{selected_persona_prompt}
+        
+        CONTEXT DATA:
+        {context}
+        
+        OFFICIAL INSTRUCTIONS:
+        1. **NO OUTSIDE KNOWLEDGE**: You are FORBIDDEN from using your pre-trained knowledge. Use ONLY the 'CONTEXT DATA' provided above.
+        2. **STRICT FALLBACK**: If the answer is not explicitly written in the CONTEXT DATA, you MUST respond with a variation of "I don't have that information." Do not guess. Do not halllucinate.
+        3. **QUOTES**: When possible, base your answer on specific phrases from the text.
+        4. **PERSONA**: Keep your persona, but do not let it excuse hallucinations. Accuracy is the highest law.
+        
+        Question: {state["question"]}
+        """
 
     prompt = PromptTemplate.from_template(system_prompt + "\nAnswer:")
 
