@@ -247,6 +247,18 @@ def generate_node(state: AgentState):
     return {"answer": response}
 
 
+def check_retrieval(state: AgentState):
+    """
+    Checks if retrieval found relevant documents.
+    If not (empty context), routes to Web Search.
+    """
+    context = state.get("context", "")
+    if not context or len(context.strip()) < 10:
+        print("  ! Retrieval empty or irrelevant -> Fallback to WEB SEARCH")
+        return "web_search"
+    return "generate"
+
+
 # --- Graph ---
 workflow = StateGraph(AgentState)
 
@@ -261,7 +273,10 @@ workflow.set_conditional_entry_point(
 )
 
 # Edges
-workflow.add_edge("retrieve", "generate")
+# If retrieve fails (no docs > threshold), fall back to web search
+workflow.add_conditional_edges(
+    "retrieve", check_retrieval, {"web_search": "web_search", "generate": "generate"}
+)
 workflow.add_edge("web_search", "generate")
 workflow.add_edge("generate", END)
 
