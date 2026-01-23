@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import CharacterGrid from "@/components/CharacterGrid";
-import Features from "@/components/Features";
+import DragonRadar from "@/components/DragonRadar";
 import Stats from "@/components/Stats";
 import Transformations from "@/components/Transformations";
 import ChatSection from "@/components/ChatSection";
@@ -31,7 +31,7 @@ export default function Home() {
 
         {/* Content */}
         <div className="relative z-10">
-          <Features />
+          <DragonRadar />
           <Stats />
           <CharacterGrid />
           <Transformations />
