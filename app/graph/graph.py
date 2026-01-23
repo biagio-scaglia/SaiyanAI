@@ -15,7 +15,9 @@ from langgraph.graph import StateGraph, END
 MODEL_PATH = "models/Llama-3.2-3B-Instruct-Q4_K_M.gguf"
 QDRANT_PATH = "./qdrant_data"
 COLLECTION_NAME = "dragonball_knowledge"
-SIMILARITY_THRESHOLD = 0.30  # Adjusted based on observed score range
+SIMILARITY_THRESHOLD = (
+    0.50  # Increased to prevent weak matches from blocking web search
+)
 
 # --- Init Components ---
 print("Initializing components...")
@@ -86,6 +88,24 @@ def router_node(state: AgentState):
         "2025",
         "next year",
         "this year",
+        "game",
+        "videogame",
+        "console",
+        "ps2",
+        "ps3",
+        "ps4",
+        "ps5",
+        "xbox",
+        "sparking",
+        "budokai",
+        "tenkaichi",
+        "xenoverse",
+        "fighterz",
+        "kakarot",
+        "infinite world",
+        "daima",
+        "movie",
+        "film",
     ]
 
     # Keywords that indicate knowledge base is sufficient
