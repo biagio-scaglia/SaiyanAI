@@ -228,17 +228,18 @@ def generate_node(state: AgentState):
     source = state.get("source", "retriever")
 
     if source == "web":
-        # WEB SEARCH MODE: Lenient summarization
+        # WEB SEARCH MODE: Lenient summarization but STRICT RELEVANCE
         system_prompt = f"""{selected_persona_prompt}
         
         SEARCH RESULTS:
         {context}
         
         INSTRUCTIONS:
-        1. **Summarize**: Use the search results above to answer the user's question clearly.
-        2. **Gaps**: If the results don't fully answer the question, say "Based on my quick search, here is what I found..." and give the best possible info.
-        3. **Persona**: Maintain your character's voice while summarizing.
-        4. **Attribution**: Mention that this info comes from a web search.
+        1. **Relevance Check**: Ignore any search results that are NOT related to Dragon Ball, Anime, Manga, or Games.
+        2. **Summarize**: Use ONLY the relevant Dragon Ball search results to answer the question.
+        3. **Gaps**: If the search results are about math (e.g. Laplace transforms), science, or unrelated topics, IGNORE THEM.
+        4. **Fallback**: If no relevant Dragon Ball info is found in the results, say "I couldn't find any clear Dragon Ball information about that."
+        5. **Persona**: Maintain your character's voice.
         
         Question: {state["question"]}
         """
